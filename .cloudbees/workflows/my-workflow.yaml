@@ -32,7 +32,7 @@ jobs:
         shell: sh
     needs:
       - job6
-  job2:
+  job1:
     needs:
       - job1
     steps:
