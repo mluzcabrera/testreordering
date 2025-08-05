@@ -65,13 +65,14 @@ jobs:
         name: Say hello
         shell: sh
   job:
+    needs:
+      - job7
+      - job4
     steps:
       - run: echo "hello world"
         uses: docker://golang:1.20.3-alpine3.17
         name: Say hello
         shell: sh
-    needs:
-      - job7
   job6:
     needs:
       - job
