@@ -1,3 +1,4 @@
+
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
 name: My workflow
@@ -91,7 +92,7 @@ jobs:
   jo99:
     needs:
       - job100
-      - job4
+      - job100
     steps:
       - uses: a
         name: a
