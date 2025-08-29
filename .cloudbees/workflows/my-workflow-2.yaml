@@ -91,7 +91,7 @@ jobs:
   jo99:
     needs:
       - job100
-      - job100
+      - job4
     steps:
       - uses: a
         name: a
