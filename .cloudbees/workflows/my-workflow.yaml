@@ -21,16 +21,22 @@ metadata:
         - job7
         - job8
         - job9
+    - name: Stage
+      jobs:
+        - job
 jobs:
   job1:
+    needs:
+      - job10
+      - job11
+      - job12
     steps:
       - run: echo "hello world"
         uses: docker://golang:1.20.3-alpine3.17
         name: Hello world
         shell: sh
   job2:
-    needs:
-      - job1
+    needs: job1
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -42,35 +48,33 @@ jobs:
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
         run: echo "hello world"
-    needs:
-      - job2
+    needs: job2
   job4:
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
         run: echo "hello world"
-    needs:
-      - job3
+    needs: job3
   job5:
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
         run: echo "hello world"
-    needs:
-      - job4
+    needs: job4
   job6:
+    needs:
+      - job10
+      - job11
+      - job12
     steps:
-      - name: Say hello
+      - run: echo "hello world"
         uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
         shell: sh
-        run: echo "hello world"
-    needs:
-      - job5
   job7:
-    needs:
-      - job6
+    needs: job6
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -82,8 +86,7 @@ jobs:
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
         run: echo "hello world"
-    needs:
-      - job7
+    needs: job7
   job9:
     steps:
       - name: Say hello
@@ -109,4 +112,11 @@ jobs:
         uses: docker://golang:1.20.3-alpine3.17
         name: Say hello
         shell: sh
-    needs: job11
+  job:
+    needs:
+      - job9
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: echo "hello world"
