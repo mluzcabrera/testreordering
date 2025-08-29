@@ -1,3 +1,4 @@
+
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
 name: My workflow
@@ -5,13 +6,100 @@ on:
   workflow_dispatch: null
 metadata:
   stages/v1alpha1:
+    - name: Stage1
+      jobs:
+        - job6
+        - job7
     - name: Stage 1
       jobs:
+        - job8
+        - job3
+        - job5
+        - job
+        - job4
         - job1
+        - job2
+        - job100
+    - name: Stage
+      jobs:
+        - jo99
 jobs:
   job1:
+    needs:
+      - job6
+      - job7
     steps:
       - run: echo "hello world"
         uses: docker://golang:1.20.3-alpine3.17
         name: Hello world
         shell: sh
+  job:
+    needs: job5
+    steps:
+      - run: echo "hello world"
+        uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
+        shell: sh
+  job2:
+    steps:
+      - run: echo "hello world"
+        uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
+        shell: sh
+    needs: job1
+  job3:
+    needs: job8
+    steps:
+      - run: echo "hello world"
+        uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
+        shell: sh
+  job4:
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: echo "hello world"
+    needs: job
+  job6:
+    steps:
+      - run: echo "hello world"
+        uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
+        shell: sh
+  job7:
+    steps:
+      - run: echo "hello world"
+        uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
+        shell: sh
+  job5:
+    needs: job3
+    steps:
+      - run: echo "hello world"
+        uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
+        shell: sh
+  job8:
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: echo "hello world"
+    needs:
+      - job6
+      - job7
+  jo99:
+    needs:
+      - job100
+      - job100
+    steps:
+      - uses: a
+        name: a
+  job100:
+    needs:
+      - job4
+      - job2
+    steps:
+      - uses: a
+        name: a
